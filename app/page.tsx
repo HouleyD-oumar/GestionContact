@@ -1,4 +1,5 @@
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Form from "./components/Form";
 import ListGrid from "./components/ListGrid";
 import Header from "./components/layout/Header";
@@ -8,6 +9,7 @@ export default function Home() {
         <Header />
        <Form />
       <ListGrid />
+        <ToastContainer />
       {/* FOOTER à implementer */}
     </div>
   );
