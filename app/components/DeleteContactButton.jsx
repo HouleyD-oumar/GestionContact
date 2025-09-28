@@ -9,14 +9,14 @@ export default function DeleteContactButton({ id, onDeleteSuccess }) {
       });
 
       if (res.ok) {
-        toast.success("Contact supprimé avec succès ✅");
+        toast.success("Contact supprimé avec succès ");
         onDeleteSuccess(id); 
       } else {
-        toast.error("Erreur lors de la suppression ❌");
+        toast.error("Erreur lors de la suppression ");
       }
     } catch (err) {
       console.error(err);
-      toast.error("Impossible de supprimer (erreur réseau) 🌐");
+      toast.error("Impossible de supprimer (erreur réseau) ");
     }
   };
 
