@@ -1,4 +1,6 @@
 "use client"; 
+import toast from "react-hot-toast";
+
 export default function DeleteContactButton({ id, onDeleteSuccess }) {
   const handleDelete = async () => {
     try {
@@ -7,13 +9,14 @@ export default function DeleteContactButton({ id, onDeleteSuccess }) {
       });
 
       if (res.ok) {
+        toast.success("Contact supprimé avec succès ✅");
         onDeleteSuccess(id); 
       } else {
-        alert("Erreur lors de la suppression");
+        toast.error("Erreur lors de la suppression ❌");
       }
     } catch (err) {
       console.error(err);
-      alert("Impossible de supprimer (erreur réseau)");
+      toast.error("Impossible de supprimer (erreur réseau) 🌐");
     }
   };
 
