@@ -1,26 +1,35 @@
 # Gestion de contacts 
 
-c'est un muni-projet pour pratiquer le travail en équipe .il permet de créer et de gérer des contacts avec nom et numéro de télephone
+C'est un mini-projet pour pratiquer le travail en équipe. Il permet de créer et de gérer des contacts avec nom et numéro de téléphone.
 
 ## Fonctionalités
+
 - Création de contact avec `nom` et `numero`
 - Gestion de contact avec `modification ou suppression de contact`
-- Consultation des Contacts éxistant
+- Consultation des Contacts existant
 
-## Configuration 
- - un cloner le projet :
+## Configuration
+
+- Cloner le projet :
+
 ```bash
 git clone https://github.com/HouleyD-oumar/GestionContact.git
 ```
-- installer les dépendences 
+
+- Installer les dépendances :
+
 ```bash
 npm install
 ```
-- lancer le projet 
+
+- Lancer le projet :
+
 ```bash
 npm run dev
 ```
+
 ## Technologies
+
 - Next.js 15
 - React 19 (avec Hooks pour la gestion d'état)
 - TypeScript 5
@@ -29,6 +38,33 @@ npm run dev
 - React-Toastify (pour les notifications)
 
 ## Contraintes et bonnes pratiques
+
+### 🎨 Design Pattern et UI
+
+- Palette de Couleurs :
+  - Principales :
+    - Bleu Nuit (`#0A1931`) - Navigation et en-têtes
+    - Blanc (`#FFFFFF`) - Arrière-plan principal
+    - Noir (`#000000`) - Texte principal
+  - Actions (CTA) :
+    - Primaire (`#185ADB`) - Actions principales
+    - Succès (`#4CAF50`) - Validations
+    - Attention (`#FFA500`) - Modifications
+    - Danger (`#DC3545`) - Suppressions
+
+- Modales :
+  - Mise à jour : Fond blanc, en-tête clair, formulaires espacés
+  - Confirmation : Centrée, message concis, icônes intuitives
+  - Actions : Boutons différenciés par couleur
+
+- Messages et Toasts :
+  - Position en haut à droite
+  - Durée de 3 secondes
+  - Messages clairs et intuitifs
+  - Code couleur contextuel (succès, information, avertissement, erreur)
+
+### 💻 Conventions de Code
+
 - Conventions de nommage :
   - camelCase pour les variables et propriétés (ex: `firstName`, `phoneNumber`)
   - PascalCase pour les composants (ex: `ContactForm`, `ContactList`)
