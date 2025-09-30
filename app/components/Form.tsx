@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { useList } from "../services/ListService";
+import { ContactFormData, ContactFormErrors } from "../types/ContactForm";
 import { z } from "zod";
 
 
@@ -22,19 +23,17 @@ const Form: React.FC = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof Contact, string>>>({});
 
   // Soumission du formulaire
-  const handleSubmit = (e: React.FormEvent) => {
+  const { addContact } = useList();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const result = contact.safeParse(formData);
-
-   if (!result.success) {
-  const fieldErrors = result.error.flatten().fieldErrors;
-  setErrors({
-    name: fieldErrors.name?.[0] ?? "",
-    phoneNumber: fieldErrors.phoneNumber?.[0] ?? "",
-  });
-  toast.error("Veuillez Remplir les champs ");
-}
+    const result = await addContact(formData);
+    
+    if (!result.success && result.errors) {
+      setErrors(result.errors);
+    } else if (result.success) {
+      setFormData({ name: "", phoneNumber: "" });
+      setErrors({});
+    }
   }
   return (
     <form

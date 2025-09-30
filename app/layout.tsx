@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./styles/animations.css";
 import Header from "./components/layout/Header";
 import { ListProvider } from './services/ListService';
 

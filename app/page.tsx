@@ -1,15 +1,11 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Form from "./components/Form";
-import ListGrid from "./components/ListGrid";
-import Header from "./components/layout/Header";
+import ListGrid from './components/ListGrid';
 export default function Home() {
   return (
-    <div className="W-full h-screen  grid grid-rows[80px_1fr_3fr] items-center justify-center">
-       <Form />
+    <div className="container mx-auto px-4 py-8">
       <ListGrid />
-        <ToastContainer />
-      {/* FOOTER à implementer */}
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }
