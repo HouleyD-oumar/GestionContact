@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Contact } from '../types/Contact';
 
 
@@ -10,8 +10,6 @@ interface ContactCardProps {
 }
 
 const ContactCard = ({ contact, onUpdate, onDelete }: ContactCardProps) => {
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 hover:shadow-lg transition-all duration-300 ease-in-out hover:bg-gradient-to-br hover:from-white hover:to-blue-50/50 border border-gray-200/80">

@@ -2,14 +2,14 @@
 import { useState } from 'react';
 import ContactCard from './ContactCard';
 import { useList } from '../services/ListService';
-import Form from './Form';
-import UpdateModal from './UpdateModal';
+import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
+import AddContactModal from './AddContactModal';
 import { Contact } from '../types/Contact';
 
 const ListGrid = () => {
   const { contacts, loading, error, deleteContact } = useList();
-  const [showForm, setShowForm] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -75,21 +75,20 @@ const ListGrid = () => {
           </div>
         </div>
         <button 
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => setIsAddModalOpen(true)}
           className="group relative inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-blue-500 to-blue-600 text-white font-medium rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-300"
         >
           <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          <span>{showForm ? "Fermer" : "Nouveau contact"}</span>
+          <span>Nouveau contact</span>
         </button>
       </div>
-      
-      {showForm && (
-        <div className="animate-slideDown">
-          <Form />
-        </div>
-      )}
+
+      <AddContactModal 
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
       
       {/* Liste des contacts */}
       {contacts.length === 0 ? (
@@ -126,7 +125,7 @@ const ListGrid = () => {
       {/* Modales */}
       {selectedContact && (
         <>
-          <UpdateModal
+          <EditModal
             contact={selectedContact}
             isOpen={isUpdateModalOpen}
             onClose={() => {
