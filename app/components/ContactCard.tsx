@@ -1,14 +1,26 @@
 'use client';
+
+// Carte qui affiche un contact avec des boutons pour modifier/supprimer
+
 import React from 'react';
 import { Contact } from '../types/Contact';
 
-
+// Props du composant
 interface ContactCardProps {
+  // Le contact à afficher
   contact: Contact;
+  // Fonction appelée quand on veut modifier
   onUpdate: (contact: Contact) => void;
+  // Fonction appelée quand on veut supprimer
   onDelete: (contact: Contact) => void;
 }
 
+// Exemple d'utilisation :
+// <ContactCard 
+//   contact={{ id: 1, nom: "Jean", numero: "612345678" }}
+//   onUpdate={modifierContact}
+//   onDelete={supprimerContact}
+// />
 const ContactCard = ({ contact, onUpdate, onDelete }: ContactCardProps) => {
 
   return (

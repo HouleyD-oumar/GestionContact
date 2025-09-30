@@ -1,5 +1,8 @@
 'use client';
 
+// Service principal pour gérer la liste des contacts
+// Utilise Context API pour partager les données entre composants
+
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { showToast } from '../utils/toast';
 import { Contact } from '../types/Contact';
@@ -7,26 +10,44 @@ import { ContactFormData, contactSchema, ContactFormErrors } from '../types/Cont
 import { initialContacts } from '../data/contactsData';
 import { API_CONFIG, isApiAvailable } from '../config/api';
 
+// Type pour le contexte de la liste des contacts
 interface ListContextType {
+  // La liste des contacts
   contacts: Contact[];
+  // Ajoute un nouveau contact et renvoie le résultat
   addContact: (formData: ContactFormData) => Promise<{
     success: boolean;
     errors: ContactFormErrors | null;
   }>;
+  // Met à jour un contact existant
   updateContact: (id: string | number, contact: Partial<Contact>) => void;
+  // Supprime un contact
   deleteContact: (id: string | number) => void;
+  // Indique si une opération est en cours
   loading: boolean;
+  // Message d'erreur s'il y en a un
   error: string | null;
 }
 
 const ListContext = createContext<ListContextType | undefined>(undefined);
 
 
+/**
+ * Fournisseur de contexte pour la gestion des contacts
+ * Gère l'état global des contacts et expose les méthodes CRUD
+ * 
+ * @param {Object} props - Les propriétés du composant
+ * @param {React.ReactNode} props.children - Les composants enfants
+ */
 export function ListProvider({ children }: { children: React.ReactNode }) {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Effet pour charger les contacts au montage du composant
+   * Tente d'abord de charger depuis l'API, utilise les données locales en fallback
+   */
   useEffect(() => {
     const fetchContacts = async () => {
       setLoading(true);
